@@ -5,5 +5,5 @@ package com.patelheggere.ecommerce.utils;
  */
 
 public class AppConstants {
-    public static String URL = "https://stark-spire-93433.herokuapp.com/json";
+    public static String BASE_URL = "https://stark-spire-93433.herokuapp.com/json";
 }

@@ -3,6 +3,7 @@ package com.patelheggere.ecommerce.presenter;
 import android.view.View;
 
 import com.patelheggere.ecommerce.contract.MainActivtyContract;
+import com.patelheggere.ecommerce.datamodel.ResultModel;
 import com.patelheggere.ecommerce.model.MainActivityModelImpl;
 
 /**
@@ -13,6 +14,7 @@ public class MainActivityPresenterImpl implements MainActivtyContract.Presenter 
 
     MainActivtyContract.View mMainActivityView;
     MainActivtyContract.Model mMainActivityModel;
+    private ResultModel resultModel;
 
     public MainActivityPresenterImpl(MainActivtyContract.View view)
     {
@@ -28,12 +30,14 @@ public class MainActivityPresenterImpl implements MainActivtyContract.Presenter 
 
     @Override
     public void onClick(View view) {
-        mMainActivityModel.fetchData();
+        mMainActivityView.setData(resultModel);
     }
 
     @Override
-    public void get() {
-        mMainActivityModel.fetchData();
+    public ResultModel get() {
+        resultModel = mMainActivityModel.fetchData();
+        return resultModel;
+
     }
 
 }

@@ -29,13 +29,14 @@ import java.util.List;
 
 public class MainActivityModelImpl implements MainActivtyContract.Model {
 
+    private ResultModel resultModel;
     @Override
-    public void fetchData() {
+    public ResultModel fetchData() {
         final Gson mGson = new Gson();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, AppConstants.URL, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, AppConstants.BASE_URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                ResultModel resultModel = mGson.fromJson(response.toString(), ResultModel.class);
+                 resultModel = mGson.fromJson(response.toString(), ResultModel.class);
                 if(resultModel!=null)
                     Log.d("MainActModelImpl", "onResponse: "+resultModel.getCategories().get(0).getProducts().get(0).getVariants().get(0).getColor());
             }
@@ -46,5 +47,6 @@ public class MainActivityModelImpl implements MainActivtyContract.Model {
             }
         });
         MySingleton.getInstance().addToRequestQueue(jsonObjectRequest);
+        return resultModel;
     }
 }
